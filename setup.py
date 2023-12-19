@@ -5,19 +5,23 @@ from setuptools import find_packages, setup
 extras_require = {
     "test": [  # `test` GitHub Action jobs uses this
         "pytest>=6.0",  # Core testing package
-        "pytest-xdist",  # multi-process runner
+        "pytest-xdist",  # Multi-process runner
         "pytest-cov",  # Coverage analyzer plugin
         "hypothesis>=6.2.0,<7.0",  # Strategy-based fuzzer
     ],
     "lint": [
-        "black>=23.3.0,<24",  # auto-formatter and linter
-        "mypy>=0.991,<1",  # Static type analyzer
-        "types-setuptools",  # Needed due to mypy typeshed
-        "flake8>=6.0.0,<7",  # Style linter
+        "black>=24.3.0,<25",  # Auto-formatter and linter
+        "mypy>=1.9.0",  # Static type analyzer
+        "types-setuptools",  # Needed for mypy type shed
+        "types-requests",  # Needed for mypy type shed
+        "flake8>=7.0.0,<8",  # Style linter
+        "flake8-breakpoint>=1.1.0,<2",  # Detect breakpoints left in code
+        "flake8-print>=5.0.0,<6",  # Detect print statements left in code
         "isort>=5.10.1,<6",  # Import sorting linter
-        "mdformat>=0.7.16",  # Auto-formatter for markdown
+        "mdformat>=0.7.17",  # Auto-formatter for markdown
         "mdformat-gfm>=0.3.5",  # Needed for formatting GitHub-flavored markdown
         "mdformat-frontmatter>=0.4.1",  # Needed for frontmatters-style headers in issue templates
+        "mdformat-pyproject>=0.0.1",  # Allows configuring in pyproject.toml
     ],
     "release": [  # `release` GitHub Action job uses this
         "setuptools",  # Installation tool
@@ -46,36 +50,31 @@ with open("./README.md") as readme:
 
 
 setup(
-    name="ape-template",
+    name="ape-cairo",
     use_scm_version=True,
     setup_requires=["setuptools_scm"],
-    description="""ape-template: ape plugin for cookiecutter based templates""",
+    description="""ape-cairo: A compiler plugin for the cairo programming language""",
     long_description=long_description,
     long_description_content_type="text/markdown",
     author="ApeWorX Ltd.",
     author_email="admin@apeworx.io",
-    url="https://github.com/ApeWorX/ape-template",
+    url="https://github.com/ApeWorX/<REPO_NAME>",
     include_package_data=True,
     install_requires=[
-        "click",  # Use same version as eth-ape
-        "cookiecutter>=2.1.1,<2.2.0",
-        "eth-ape>=0.6.0,<0.7",
+        "eth-ape>=0.7.16,<0.8",
+        "ethpm-types",
+        "tomli"
     ],
-    entry_points={
-        "ape_cli_subcommands": [
-            "ape_template=ape_template._cli:cli",
-        ],
-    },
     python_requires=">=3.8,<4",
     extras_require=extras_require,
-    py_modules=["ape_template"],
+    py_modules=["ape_cairo"],
     license="Apache-2.0",
     zip_safe=False,
     keywords="ethereum",
     packages=find_packages(exclude=["tests", "tests.*"]),
-    package_data={"ape_template": ["py.typed"]},
+    package_data={"ape_cairo": ["py.typed"]},
     classifiers=[
-        "Development Status :: 5 - Production/Stable",
+        "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",
         "License :: OSI Approved :: Apache Software License",
         "Natural Language :: English",

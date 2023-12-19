@@ -1,40 +1,43 @@
-import os
 import shutil
+from distutils.dir_util import copy_tree
 from pathlib import Path
+from tempfile import mkdtemp
 
+import ape
 import pytest
-from click.testing import CliRunner
 
-from ape_template._cli import cli as template_cli
+# NOTE: Ensure that we don't use local paths for these
+ape.config.DATA_FOLDER = Path(mkdtemp()).resolve()
+ape.config.PROJECT_FOLDER = Path(mkdtemp()).resolve()
 
+PROJECTS_DIRECTORY = Path(__file__).parent / "projects"
+PROJECT_DIRECTORIES = [d for d in PROJECTS_DIRECTORY.iterdir() if d.is_dir()]
 
-@pytest.fixture(scope="session")
-def cli():
-    return template_cli
+@pytest.fixture(params=PROJECT_DIRECTORIES, scope="module")
+def project_directory(request):
+    return request.param
 
+@pytest.fixture(scope="module")
+def config():
+    return ape.config
 
-@pytest.fixture(scope="session")
-def runner():
-    yield CliRunner()
+@pytest.fixture(scope="module")
+def project(config, project_directory):
+    caches = [
+        project_directory / ".build",
+        project_directory / ".cache",
+    ]
+    for cache in caches:
+        if cache.is_dir():
+            shutil.rmtree(cache)
 
+    project_dest_dir = config.PROJECT_FOLDER / project_directory.name
+    copy_tree(str(project_directory.as_posix()), str(project_dest_dir))
+    with config.using_project(project_dest_dir) as project:
+        yield project
+        if project.local_project._cache_folder.is_dir():
+            shutil.rmtree(project.local_project._cache_folder)
 
-@pytest.fixture(scope="session", autouse=True)
-def from_tests_dir():
-    tests_dir = Path(__file__).parent
-    curr_dir = os.curdir
-    os.chdir(str(tests_dir))
-    yield tests_dir
-    os.chdir(curr_dir)
-
-
-@pytest.fixture
-def project_path():
-    project_path = Path(__file__).parent / "TokenProject"
-
-    if project_path.exists():
-        shutil.rmtree(project_path)
-
-    yield project_path
-
-    if project_path.exists():
-        shutil.rmtree(project_path)
+@pytest.fixture(scope="module")
+def compiler():
+    return ape.compilers.registered_compilers[".cairo"]

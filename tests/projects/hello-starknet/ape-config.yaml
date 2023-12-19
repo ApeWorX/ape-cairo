@@ -1,0 +1,4 @@
+contracts_folder: "src"
+
+cairo:
+  cairo_manifest: "/Users/mert/ape_new/cairo/Cargo.toml"

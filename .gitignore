@@ -119,6 +119,9 @@ version.py
 
 # Ape stuff
 .build/
+.target/
+**/Scarb.lock
+Scarb.lock
 
 **/.DS_Store
 *.swp
