@@ -10,33 +10,33 @@ Ape compiler plugin around [the Starknet Cairo language](https://github.com/star
 
 - **(Recommended)** If you have Scarb project, please install [Scarb](https://docs.swmansion.com/scarb/download.html) .
 
-    ```shell
-    # Install via quick installation script
-    curl --proto '=https' --tlsv1.2 -sSf https://docs.swmansion.com/scarb/install.sh | sh
-    ```
+  ```shell
+  # Install via quick installation script
+  curl --proto '=https' --tlsv1.2 -sSf https://docs.swmansion.com/scarb/install.sh | sh
+  ```
 
-    or
+  or
 
-    ```shell
-    # Install via asdf version manager
-    asdf plugin add scarb
-    asdf install scarb latest
-    asdf global scarb latest
-    ```
+  ```shell
+  # Install via asdf version manager
+  asdf plugin add scarb
+  asdf install scarb latest
+  asdf global scarb latest
+  ```
 
 - If you have a single Cairo contract or a package that defines `cairo_project.toml` file, please install [Cairo](https://github.com/starkware-libs/cairo)
 
-    First, you need to install Rust. You can do this by running the following command:
+  First, you need to install Rust. You can do this by running the following command:
 
-    ```shell
-    rustup override set stable && rustup update
-    ```
+  ```shell
+  rustup override set stable && rustup update
+  ```
 
-    Then, you can install Cairo by running the following command:
+  Then, you can install Cairo by running the following command:
 
-    ```shell
-    git clone https://github.com/starkware-libs/cairo my/cairo/path
-    ```
+  ```shell
+  git clone https://github.com/starkware-libs/cairo my/cairo/path
+  ```
 
 ## Installation
 

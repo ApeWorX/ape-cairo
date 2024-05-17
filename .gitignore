@@ -1,4 +1,5 @@
 # Byte-compiled / optimized / DLL files
+other_tests/
 __pycache__/
 *.py[cod]
 *$py.class
@@ -122,6 +123,7 @@ version.py
 .target/
 **/Scarb.lock
 Scarb.lock
+tests/cairo
 
 **/.DS_Store
 *.swp

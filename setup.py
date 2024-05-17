@@ -12,6 +12,7 @@ extras_require = {
     "lint": [
         "black>=24.3.0,<25",  # Auto-formatter and linter
         "mypy>=1.9.0",  # Static type analyzer
+        "semantic-version>=2.8.5,<3",  # Versioning scheme
         "types-setuptools",  # Needed for mypy type shed
         "types-requests",  # Needed for mypy type shed
         "flake8>=7.0.0,<8",  # Style linter
@@ -60,11 +61,7 @@ setup(
     author_email="admin@apeworx.io",
     url="https://github.com/ApeWorX/<REPO_NAME>",
     include_package_data=True,
-    install_requires=[
-        "eth-ape>=0.7.16,<0.8",
-        "ethpm-types",
-        "tomli"
-    ],
+    install_requires=["eth-ape>=0.7.16,<0.8", "ethpm-types", "tomli"],
     python_requires=">=3.8,<4",
     extras_require=extras_require,
     py_modules=["ape_cairo"],

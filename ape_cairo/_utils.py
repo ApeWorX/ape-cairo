@@ -16,7 +16,7 @@ def _run(*args) -> Tuple[bytes, bytes]:
     return popen.communicate()
 
 
-def _communicate(*args) -> Tuple[bytes, bytes]:
+def _communicate(*args) -> subprocess.Popen:
     popen = subprocess.Popen(
         args,
         stdout=subprocess.PIPE,
