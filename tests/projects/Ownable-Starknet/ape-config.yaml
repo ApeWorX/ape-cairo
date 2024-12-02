@@ -1,4 +1,2 @@
 contracts_folder: "src"
 
-cairo:
-  scarb_manifest: "Scarb.toml"

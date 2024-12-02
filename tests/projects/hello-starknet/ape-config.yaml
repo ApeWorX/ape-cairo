@@ -1,4 +1,0 @@
-contracts_folder: "src"
-
-cairo:
-  cairo_manifest: "../../cairo/Cargo.toml" # Path: ape-cairo/tests/

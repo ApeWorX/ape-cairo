@@ -1,12 +1,13 @@
 [package]
-name = "ownable_starknet"
+name = "ownable"
 version = "0.1.0"
+cairo-version = "2.6.3"
 
-# See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest
-
-[dependencies]
-starknet = ">=2.5.0"
-
+[target]
 [[target.starknet-contract]]
 sierra = true
 casm = true
+casm-add-pythonic-hints = true
+
+[dependencies]
+starknet = "2.6.3"

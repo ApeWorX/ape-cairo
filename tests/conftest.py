@@ -36,13 +36,13 @@ def project(config, project_directory):
         if cache.exists() and cache.is_dir():
             shutil.rmtree(cache)
 
-    # project_dest_dir = config.PROJECT_FOLDER / project_directory.name
-    # copy_tree(str(project_directory.as_posix()), str(project_dest_dir))
-    # with config.using_project(project_dest_dir) as project:
-    with config.using_project(project_directory) as project:
-        yield project
-        if project.local_project._cache_folder.is_dir():
-            shutil.rmtree(project.local_project._cache_folder)
+    # Instead of config.using_project(), use ape.Project
+    project = ape.Project(project_directory)
+    yield project
+
+    # Clean up
+    if project.path / "_cache" and (project.path / "_cache").is_dir():
+        shutil.rmtree(project.path / "_cache")
 
 
 @pytest.fixture(scope="module")
